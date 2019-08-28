@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -18,9 +18,10 @@ tasks = [
     }
 ]
 
-@app.route('/')
-def index():
-    return 'Hello, World!'
+# first entry of the web service
+@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+def get_tasks():
+    return jsonify({'tasks': tasks})
 
 if __name__ == '__main__':
     app.run(debug=True)
